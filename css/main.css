@@ -8761,6 +8761,11 @@ footer p {
   margin-bottom: .25rem;
 }
 
+.search-bar {
+  max-width: 60rem;
+  margin-bottom: 2rem;
+}
+
 .title__secondary {
   font-weight: 300;
   padding: 1rem 0 1rem 0;

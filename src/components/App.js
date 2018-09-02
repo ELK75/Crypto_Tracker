@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 
+import CryptoList from '../containers/crypto_list';
+import SearchBar from '../containers/search_bar';
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <p>Eskeetit</p>
+      <div>
+        <SearchBar />
+        <div className="row">
+          <CryptoList />
+        </div>
       </div>
     );
   }
