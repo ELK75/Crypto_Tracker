@@ -7,7 +7,7 @@ class CryptoList extends Component {
 
     renderCryptoData(cryptoData) {
         return (
-            <Graph text={cryptoData} />
+            <Graph text={cryptoData} id={cryptoData.data}/>
         );
     }
 

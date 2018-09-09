@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "functional": "c",
+        "system_error": "c",
+        "xlocmon": "c",
+        "xtr1common": "c"
+    }
+}

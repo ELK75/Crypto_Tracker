@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchCryptoData } from '../actions/index';
+import { fetchCryptoData, fetchCryptoNames } from '../actions/index';
+import { InputAutocomplete } from 'input-autocomplete'
 
 class SearchBar extends Component {
     constructor() {
@@ -12,8 +13,12 @@ class SearchBar extends Component {
         this.onFormSubmit = this.onFormSubmit.bind(this);
     }
 
+    componentDidMount() {
+        this.props.fetchCryptoNames();
+    }
+
     onInputChange(event) {
-        this.setState({ term: event.target.value });
+        this.setState({ term: event.target.value.toLowerCase() });
     }
 
     onFormSubmit(event) {
@@ -24,16 +29,19 @@ class SearchBar extends Component {
     }
 
     render() {
+
         return (
-            <form onSubmit={this.onFormSubmit} className="input-group container search-bar">
-                <input 
-                    placeholder="Enter a cryptocurrency to track..."
-                    className="form-control"
-                    value={this.state.term}
-                    onChange={this.onInputChange}
+            <form onSubmit={this.onFormSubmit} className="input-group container">
+                <InputAutocomplete
+                      type='text'
+                      autocompleteValues={this.props.cryptoNames}
+                      value={this.state.name}
+                      onChange={this.onInputChange}
+                      onSubmit={this.onFormSubmit}
+                      className="form-control"
                 />
                 <span className="input-group-btn">
-                    <button type="submit" className="btn btn-secondary">Submit</button>
+                    <button type="submit" className="btn btn-primary">Submit</button>
                 </span>
             </form>
         )
@@ -41,7 +49,11 @@ class SearchBar extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ fetchCryptoData }, dispatch);
+    return bindActionCreators({ fetchCryptoData, fetchCryptoNames }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(SearchBar);
+function mapStateToProps({ cryptoNames }) {
+    return { cryptoNames };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
