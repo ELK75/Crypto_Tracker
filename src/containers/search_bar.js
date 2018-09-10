@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -5,15 +6,15 @@ import { fetchCryptoData, fetchCryptoNames } from '../actions/index';
 import { InputAutocomplete } from 'input-autocomplete'
 
 class SearchBar extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = { term: '' };
 
         this.onInputChange = this.onInputChange.bind(this);
         this.onFormSubmit = this.onFormSubmit.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.fetchCryptoNames();
     }
 
@@ -29,12 +30,16 @@ class SearchBar extends Component {
     }
 
     render() {
+        var cryptoNameList = []
+        this.props.cryptoNames.map((crypto) => {
+            cryptoNameList.push(crypto.exchange_id.toLowerCase());
+        });
 
         return (
             <form onSubmit={this.onFormSubmit} className="input-group container">
                 <InputAutocomplete
                       type='text'
-                      autocompleteValues={this.props.cryptoNames}
+                      autocompleteValues={[...cryptoNameList]}
                       value={this.state.name}
                       onChange={this.onInputChange}
                       onSubmit={this.onFormSubmit}

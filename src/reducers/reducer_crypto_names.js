@@ -1,10 +1,10 @@
 import { FETCH_CRYPTO_NAMES } from '../actions/index';
 
 export default function(state=[], action) {
-    console.log(action.type);
     switch(action.type) {
         case FETCH_CRYPTO_NAMES:
-            return [ action.payload, ...state ];
+            console.log(action.payload.data + "reducer");
+            return [ ...action.payload.data ];
     }
 
     return state;

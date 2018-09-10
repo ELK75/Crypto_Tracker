@@ -17,8 +17,6 @@ export function fetchCryptoData(cryptoName) {
 
 export function fetchCryptoNames() {
 
-  console.log("HERE");
-
   const request = axios.get('https://rest.coinapi.io/v1/symbols', {
       params: {
           apikey: API_KEY
