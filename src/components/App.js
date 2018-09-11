@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div>
         <SearchBar />
-        <div className="row">
+        <div className="row u-margin-top-sm">
           <CryptoList />
         </div>
       </div>

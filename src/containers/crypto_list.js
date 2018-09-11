@@ -4,15 +4,23 @@ import { connect } from 'react-redux';
 import Graph from '../components/graph';
 
 class CryptoList extends Component {
+    
+    constructor() {
+        super();
 
-    renderCryptoData(cryptoData) {
+        this.colorList = ["blue", "orange", "red", "green", "purple", "black"];
+    }
+
+    renderCryptoData(cryptoData, index) {
         return (
-            <Graph text={cryptoData.name} data={cryptoData.prices} key={cryptoData.symbol} />
+            <Graph text={cryptoData.name} data={cryptoData.prices} key={cryptoData.symbol} color={this.colorList[index % this.colorList.length]} />
         );
     }
 
     render() {
-        return this.props.cryptoData.map(this.renderCryptoData);
+        return this.props.cryptoData.map((cryptoData, index) => {
+            return this.renderCryptoData(cryptoData, index);
+        });
     }
 }
 
