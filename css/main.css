@@ -8761,6 +8761,14 @@ footer p {
   margin-bottom: .25rem;
 }
 
+.display-graph {
+  margin-top: 2rem;
+}
+
+.display-graph__text {
+  margin-top: 1rem;
+}
+
 .search-bar {
   max-width: 60rem;
   margin-bottom: 2rem;
