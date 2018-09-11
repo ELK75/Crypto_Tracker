@@ -7,10 +7,12 @@ export default (props) => {
 
   return (
     <div className="card col-12 col-md-6 col-lg-4">
-      <Sparklines style={{background: "#f7f7f7"}} height={100} width={160} data={[5, 10, 5, 20, 8, 5]}>
+      <Sparklines height={100} width={160} data={props.data}>
         <SparklinesLine color={"blue"} />
         <SparklinesSpots />
       </Sparklines>
+
+      <h4>{props.text}</h4>
     </div>
   );
 }

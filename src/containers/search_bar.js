@@ -3,53 +3,38 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchCryptoData, fetchCryptoNames } from '../actions/index';
-import { InputAutocomplete } from 'input-autocomplete'
+import Select from 'react-select';
 
 class SearchBar extends Component {
     constructor(props) {
         super(props);
-        this.state = { term: '' };
 
-        this.onInputChange = this.onInputChange.bind(this);
-        this.onFormSubmit = this.onFormSubmit.bind(this);
+        this.state = { selectedOption: null };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.fetchCryptoNames();
     }
 
-    onInputChange(event) {
-        this.setState({ term: event.target.value.toLowerCase() });
-    }
-
-    onFormSubmit(event) {
-        event.preventDefault();
-        
-        this.props.fetchCryptoData(this.state.term);
-        this.setState({ term: '' });
+    handleChange = (selectedOption) => {
+        this.setState({ selectedOption });
+        this.props.fetchCryptoData({
+            symbol: selectedOption.value,
+            name: selectedOption.label
+        });
     }
 
     render() {
-        var cryptoNameList = []
-        this.props.cryptoNames.map((crypto) => {
-            cryptoNameList.push(crypto.exchange_id.toLowerCase());
-        });
-
+        const { selectedOption } = this.state;
+        
         return (
-            <form onSubmit={this.onFormSubmit} className="input-group container">
-                <InputAutocomplete
-                      type='text'
-                      autocompleteValues={[...cryptoNameList]}
-                      value={this.state.name}
-                      onChange={this.onInputChange}
-                      onSubmit={this.onFormSubmit}
-                      className="form-control"
-                />
-                <span className="input-group-btn">
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                </span>
-            </form>
-        )
+            <Select
+                value={selectedOption}
+                onChange={this.handleChange}
+                options={this.props.cryptoNames}
+                onSubmit={this.handleOnSubmit}
+            />
+        );
     }
 }
 
