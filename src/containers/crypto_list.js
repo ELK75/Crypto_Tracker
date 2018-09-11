@@ -12,8 +12,10 @@ class CryptoList extends Component {
     }
 
     renderCryptoData(cryptoData, index) {
+        var cryptoDataString = `${cryptoData.name} ($${cryptoData.prices[cryptoData.prices.length-1]})`
+
         return (
-            <Graph text={cryptoData.name} data={cryptoData.prices} key={cryptoData.symbol} color={this.colorList[index % this.colorList.length]} />
+            <Graph text={cryptoDataString} data={cryptoData.prices} key={cryptoData.symbol} color={this.colorList[index % this.colorList.length]} />
         );
     }
 
