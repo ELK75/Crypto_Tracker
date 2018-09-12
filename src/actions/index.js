@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import axios from 'axios';
-import { API_KEY } from '../../app-env';
 
 export const FETCH_CRYPTO_DATA = 'FETCH_CRYPTO_DATA';
 export const FETCH_CRYPTO_NAMES = 'FETCH_CRYPTO_NAMES';
