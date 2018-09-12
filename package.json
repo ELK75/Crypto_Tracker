@@ -13,10 +13,12 @@
     "webpack-dev-server": "^3.1.7"
   },
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "webpack -p",
+    "start": "node server.js"
   },
   "devDependencies": {
     "axios": "^0.18.0",
